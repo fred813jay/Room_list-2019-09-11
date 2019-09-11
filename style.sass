@@ -1,0 +1,77 @@
+*
+    font-family: 微軟正黑體
+    // border: solid 1px black
+
+$color_red: #DB4343
+
+
+.room_col
+    padding: 20px
+
+.room_container
+    // padding: 20px
+    position: relative
+    box-shadow: 0px 0px 10px rgba(0,0,0,0.3)
+    .cover
+        position: relative
+        height: 150px
+        background-color: #eee
+        background-size: 100% auto
+        background-position: center center
+        cursor: pointer
+        transition: 0.5s
+        &:hover
+            background-size: 120% auto
+        h3
+            position: absolute
+            bottom: 10px
+            background-color: #fff
+            padding: 5px 8px
+            font-size: 24px
+        i.fa.fa-times
+            position: absolute
+            right: 10px
+            top: 10px
+            color: white
+            cursor: pointer
+            transition: 0.5s
+            &:hover
+                color: $color_red
+    .infos
+        padding: 10px
+        h5
+            color: #636466  
+            font-size: 14px  
+            .icons
+                margin-left: 10px
+                display: inline-block
+                span
+                    margin-right: 5px
+                    opacity: 0.6
+        h4
+            .final_price
+                float: right
+                color: $color_red
+                &::after
+                    content: "$"
+
+.col_edit
+    background-color: #eee
+    padding: 15px 18px  
+    overflow-y: scroll
+    height: 100vh 
+    
+.rooms
+    height: 100vh
+    overflow-y: scroll    
+
+button
+    margin-top: 20px   
+    margin-bottom: 20px
+
+.cursor_pointer
+    cursor: pointer      
+
+.margin_left
+    margin-left: 20px                      
+ 

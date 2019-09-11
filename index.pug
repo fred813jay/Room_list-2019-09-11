@@ -1,0 +1,81 @@
+#app
+  .container-fluid
+    .row
+      .col-sm-3.col_edit
+        h2 飯店資料
+        hr
+        .inline
+          label 折數
+          input.form-control(v-model="hotel_discount")
+        br  
+        .inline
+          label 服務費
+          input.form-control(v-model="service_fee")
+        br
+        h2 房間編輯{{edit_room_id+1}}
+        select.form-control(v-model="edit_room_id")
+          option(v-for="(r,id) in rooms",:value="id") {{r.name}}
+        br  
+        button.btn.btn-secondary(@click="add_room()") + 新增房間  
+        br
+        hr
+        .room_edit(v-for="(ed_room,id) in [rooms[edit_room_id]]",v-if="ed_room")
+          h4 {{ed_room.name}}
+            span &nbsp
+            i.fa.fa-trash.cursor_pointer(@click="delete_room(edit_room_id)") 
+          br
+          label 中文名稱
+          input.form-control(v-model="ed_room.name")
+          br
+          label 英文名稱
+          input.form-control(v-model="ed_room.eng")           
+          br
+          label 價錢
+          input.form-control(v-model="ed_room.price")        
+          br
+          label 折數
+          input.form-control(v-model="ed_room.discount")   
+          br
+          label 圖片
+          input.form-control(v-model="ed_room.cover")      
+          br
+          label 房間設備
+          br
+          label.margin_left Wifi 
+            input.form-control(v-model="ed_room.equipment.wifi",type="checkbox")
+          span
+            label.margin_left 浴缸
+              input.form-control(v-model="ed_room.equipment.bathtub",type="checkbox")
+            label.margin_left 早餐
+             input.form-control(v-model="ed_room.equipment.breakfast",type="checkbox")            
+
+      .col-sm-9.rooms
+        h2 房間列表
+        hr
+        .row
+          .col-sm-4.room_col(v-for="(room,id) in rooms")
+            room-Temp(:room_data="room",
+                      :hotel_discount="hotel_discount",
+                      :service_fee="service_fee",
+                      :delete_room="delete_room",
+                      :id="id"
+                     )
+
+template#room_template
+  .room_container
+    .cover(:style="background_image")
+      h3 {{room_data.name}}
+      i.fa.fa-times(@click="delete_room(id)")
+    .infos
+      h5 {{room_data.eng}}
+        .icons
+          span(v-if="room_data.equipment.wifi")
+            i.fa.fa-wifi     
+          span(v-if="room_data.equipment.bathtub")
+            i.fa.fa-bath    
+          span(v-if="room_data.equipment.breakfast")
+            i.fa.fa-coffee
+      h5 {{room_data.discount}}*{{hotel_discount}} = {{final_discount}}折
+      h4 TWD
+        s {{room_data.price}}
+        .final_price {{final_price}}
